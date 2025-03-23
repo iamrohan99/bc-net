@@ -1,0 +1,38 @@
+title: "Bonus Collector"
+description: "Claim daily free spins, coins, and chips for your favorite games at Bonus Collector! Updated daily with the latest rewards."
+
+baseurl: ""
+url: "https://bonuscollector.net"
+
+markdown: kramdown
+timezone: America/Los_Angeles
+
+plugins:
+  - jekyll-sitemap
+  - jekyll-last-modified-at
+  - jekyll-redirect-from
+
+collections:
+  pages:
+    output: true
+  posts:
+    output: true
+
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: "Bonus Collector"
+
+permalink: pretty
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - LICENSE
+  - node_modules
+  - package.json
+  - package-lock.json

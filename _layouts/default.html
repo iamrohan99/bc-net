@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="{{ page.description | default: site.description | escape }}">
+  <title>
+    {% if page.title %}
+      {% if page.layout == "post" %}
+        {{ page.title }} {{ "now" | date: "%B %Y" }} - {{ site.title }}
+      {% else %}
+        {{ page.title }} - {{ site.title }}
+      {% endif %}
+    {% elsif page.url == "/" or page.url == "/index.html" %}
+      {{ site.title }} - Daily Free Rewards for Your Favorite Games
+    {% else %}
+      {{ site.title }}
+    {% endif %}
+  </title>
+
+  {% if page.manifest %}
+    <link rel="manifest" href="{{ page.manifest }}">
+  {% endif %}
+
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ page.title | default: site.title | escape }}">
+  <meta property="og:description" content="{{ page.description | default: site.description | escape }}">
+  <meta property="og:image" content="{{ page.image | default: '/assets/images/default-og-image.jpg' | absolute_url }}">
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ page.title | default: site.title | escape }}">
+  <meta name="twitter:description" content="{{ page.description | default: site.description | escape }}">
+  <meta name="twitter:image" content="{{ page.image | default: '/assets/images/default-og-image.jpg' | absolute_url }}">
+
+  <!-- Schema Markup -->
+  <script type="application/ld+json">
+    {% if page.url == "/" or page.url == "/index.html" %}
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "{{ site.title | escape }}",
+        "url": "https://bonuscollector.net/",
+        "description": "{{ site.description | default: 'Claim daily free spins, coins, and chips for your favorite games at Bonus Collector!' | escape }}",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://bonuscollector.net/?s={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    {% elsif page.layout == "post" %}
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "{{ page.title | escape }}",
+        "description": "{{ page.description | escape }}",
+        "datePublished": "{{ page.date | date_to_xmlschema }}",
+        "dateModified": "{% assign include_file = page.include_file %}{% assign file_info = site.data.include_files[include_file] %}{% if file_info and file_info.last_modified %}{{ file_info.last_modified | date_to_xmlschema }}{% else %}{{ page.last_modified_at | default: site.time | date_to_xmlschema }}{% endif %}",
+        "author": {
+          "@type": "Person",
+          "name": "{{ page.author | default: 'Bonus Collector' | escape }}"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "{{ site.title | escape }}",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://bonuscollector.net/assets/images/logo.png"
+          },
+          "sameAs": [
+            {% if site.social.twitter %}"https://twitter.com/{{ site.social.twitter }}"{% if site.social.facebook or site.social.instagram %},{% endif %}{% endif %}
+            {% if site.social.facebook %}"https://facebook.com/{{ site.social.facebook }}"{% if site.social.instagram %},{% endif %}{% endif %}
+            {% if site.social.instagram %}"https://instagram.com/{{ site.social.instagram }}"{% endif %}
+          ]
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "{{ page.url | absolute_url }}"
+        },
+        "image": "{{ page.image | default: '/assets/images/default-og-image.jpg' | absolute_url }}",
+        "keywords": "{{ page.tags | join: ', ' | escape }}"
+      }
+    {% endif %}
+  </script>
+
+  <!-- Service Worker -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('{{ site.baseurl }}/assets/sw.js')
+        .then(registration => {
+          console.log('Service Worker registered with scope:', registration.scope);
+        })
+        .catch(error => {
+          console.log('Service Worker registration failed:', error);
+        });
+      });
+    }
+  </script>
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVSB78P7CF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-EVSB78P7CF');
+  </script>
+
+  {% if page.url == "/" %}
+    <link rel="canonical" href="https://bonuscollector.net/" />
+  {% else %}
+    <link rel="canonical" href="https://bonuscollector.net{{ page.url | replace:'index.html','' }}" />
+  {% endif %}
+
+  <!-- Styles and Icons -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}">
+  <link rel="icon" href="{{ site.baseurl }}/assets/favicon.ico" type="image/x-icon">
+
+  <!-- Ads -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9883001954705974" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="{{ site.baseurl }}/"><i class="bi bi-gift-fill"></i> <b>Bonus Collector</b></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link" href="{{ site.baseurl }}/"><i class="bi bi-house-fill"></i> Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ site.baseurl }}/about/"><i class="bi bi-file-person"></i> About</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ site.baseurl }}/contact/"><i class="bi bi-person-lines-fill"></i> Contact</a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                More
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="{{ site.baseurl }}/privacy-policy/"><i class="bi bi-caret-right-fill"></i> Privacy Policy</a></li>
+                <li><a class="dropdown-item" href="{{ site.baseurl }}/disclaimer/"><i class="bi bi-caret-right-fill"></i> Disclaimer</a></li>
+                <li><a class="dropdown-item" href="{{ site.baseurl }}/dmca/"><i class="bi bi-caret-right-fill"></i> DMCA</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{{ site.baseurl }}/"><i class="bi bi-house-fill"></i> Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">{{ page.title }}</li>
+    </ol>
+  </nav>
+
+  {% if page.url == "/" %}
+    <div class="container mt-4">
+      <div class="input-group">
+        <input type="search" id="search-input" class="form-control" placeholder="Search for Games..." aria-label="Search">
+        <div class="input-group-append">
+          <button class="btn btn-primary" type="button" id="search-button">
+            <i class="bi bi-search"></i>
+          </button>
+        </div>
+      </div>
+      <div id="results-container" class="mt-4"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/simple-jekyll-search/1.7.2/simple-jekyll-search.min.js"></script>
+    <script>
+      const searchInput = document.getElementById('search-input');
+      const resultsContainer = document.getElementById('results-container');
+      const searchButton = document.getElementById('search-button');
+
+      function performSearch(query) {
+        fetch('{{ site.baseurl }}/search.json')
+          .then(response => response.json())
+          .then(data => {
+            const results = data.filter(post => 
+              (post.title && post.title.toLowerCase().includes(query.toLowerCase()))
+            );
+            resultsContainer.innerHTML = results.length > 0
+              ? results.map(result => `
+                  <div class="search-result mb-2">
+                    <a href="${result.url}" class="text-primary">${result.title}</a>
+                    <p class="text-muted small">${result.description || 'No description available'}</p>
+                  </div>
+                `).join('')
+              : '<p class="text-muted">No results found</p>';
+          })
+          .catch(error => {
+            console.error('Error fetching search data:', error);
+            resultsContainer.innerHTML = '<p class="text-danger">Error loading search results</p>';
+          });
+      }
+
+      searchButton.addEventListener('click', () => {
+        const query = searchInput.value.trim();
+        if (query) performSearch(query);
+      });
+
+      searchInput.addEventListener('keypress', (event) => {
+        if (event.key === 'Enter') {
+          const query = searchInput.value.trim();
+          if (query) performSearch(query);
+        }
+      });
+    </script>
+  {% endif %}
+
+  <main class="container">
+    {{ content }}
+  </main>
+
+  <footer class="bg-primary text-white py-4">
+    <div class="container text-center">
+      <p>© {{ site.time | date: "%Y" }} | <a href="{{ site.baseurl }}/" class="text-white"><b>Bonus Collector</b></a>. All Rights Reserved.</p>
+      <p>
+        <a href="{{ site.baseurl }}/about/" class="text-white"><i class="bi bi-file-person"></i> About</a> |
+        <a href="{{ site.baseurl }}/contact/" class="text-white"><i class="bi bi-person-lines-fill"></i> Contact</a> |
+        <a href="{{ site.baseurl }}/privacy-policy/" class="text-white"><i class="bi bi-shield-lock"></i> Privacy Policy</a> |
+        <a href="{{ site.baseurl }}/disclaimer/" class="text-white"><i class="bi bi-exclamation-circle"></i> Disclaimer</a> |
+        <a href="{{ site.baseurl }}/dmca/" class="text-white"><i class="bi bi-copyright"></i> DMCA</a> |
+        <a href="{{ site.baseurl }}/sitemap.xml" class="text-white"><i class="bi bi-diagram-2"></i> Sitemap</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="{{ '/assets/js/timeAgo.js' | relative_url }}"></script>
+</body>
+</html>
