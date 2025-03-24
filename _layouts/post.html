@@ -5,20 +5,9 @@ layout: default
 <div class="card shadow-sm mb-2">
   <div class="card-body">
 
-    <p class="card-subtitle text-muted mb-3">
-  By <strong>{{ page.author }}</strong> | 
-  {% assign include_file = page.include_file | prepend: "_includes/" %}
-  {% if site.data.include_files[page.include_file].last_modified %}
-    Last updated: 
-    <strong id="last-updated" data-last-modified="{{ site.data.include_files[page.include_file].last_modified | date: "%Y-%m-%dT%H:%M:%SZ" }}"></strong>
-  {% else %}
-    Last updated: <strong>{{ page.last_modified_at | date: "%B %d, %Y" }}</strong>
-  {% endif %}
-</p>
-
     {% if page.title %}
     <!-- App Install Section -->
-    <div class="d-flex align-items-center mb-3 mt-3 p-2 border rounded" style="background-color: #f8f9fa;">
+    <div class="d-flex align-items-center mb-3 p-2 border rounded" style="background-color: #f8f9fa;">
       <img src="{{ page.app_logo | default: '/assets/icons/icon-512x512.png' }}" alt="{{ page.title }} logo" class="mr-2" style="max-width: 40px;">
       <div class="flex-grow-1">
         <span class="font-weight-bold mb-0">{{ page.title }}</span>
@@ -28,6 +17,17 @@ layout: default
       </div>
     </div>
     {% endif %}
+
+    <p class="card-subtitle text-muted mt-3 mb-3">
+  By <strong>{{ page.author }}</strong> | 
+  {% assign include_file = page.include_file | prepend: "_includes/" %}
+  {% if site.data.include_files[page.include_file].last_modified %}
+    Last updated: 
+    <strong id="last-updated" data-last-modified="{{ site.data.include_files[page.include_file].last_modified | date: "%Y-%m-%dT%H:%M:%SZ" }}"></strong>
+  {% else %}
+    Last updated: <strong>{{ page.last_modified_at | date: "%B %d, %Y" }}</strong>
+  {% endif %}
+</p>
 
     <div class="card-text">{{ content }}</div>
 
