@@ -24,7 +24,7 @@ layout: null
       {% endfor %}
 
       {% if latest_last_modified %}
-        <lastmod>{{ latest_last_modified | date_to_xmlschema }}</lastmod>
+        <lastmod>{{ latest_last_modified | date: "%Y-%m-%d" }}</lastmod>
       {% endif %}
 
     </url>
