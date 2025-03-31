@@ -1,5 +1,9 @@
 [
   {
+    "href": "https://magiccoast.forevernine.com/api/rewardLink?code=X6CML8T6",
+    "date": "2025-03-31"
+  },
+  {
     "href": "https://magiccoast.forevernine.com/api/rewardLink?code=PDKR52VB",
     "date": "2025-03-30"
   },
@@ -394,9 +398,5 @@
   {
     "href": "https://magiccoast.forevernine.com/api/rewardLink?code=QXQC6XQH",
     "date": "2025-02-05"
-  },
-  {
-    "href": "https://magiccoast.forevernine.com/api/rewardLink?code=PCN7U2IZ",
-    "date": "2025-02-04"
   }
 ]
