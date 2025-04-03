@@ -1,9 +1,12 @@
-
 ---
-
 layout: null
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/sitemap.xsl"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="/sitemap.xsl"?><sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">  <!-- Sitemap for Posts -->  <sitemap>
+  <!-- Sitemap for Posts -->
+  <sitemap>
     <loc>{{ site.url }}/post-sitemap.xml</loc>
     <lastmod>
       {% assign last_modified_posts = site.posts | sort: 'last_modified_at' | last %}
@@ -11,7 +14,10 @@ layout: null
         {{ last_modified_posts.last_modified_at | date: "%Y-%m-%d" | strip }}
       {% endif %}
     </lastmod>
-  </sitemap>  <!-- Sitemap for Pages -->  <sitemap>
+  </sitemap>
+
+  <!-- Sitemap for Pages -->
+  <sitemap>
     <loc>{{ site.url }}/page-sitemap.xml</loc>
     <lastmod>
       {% assign last_modified_pages = site.pages | sort: 'last_modified_at' | last %}
@@ -19,7 +25,10 @@ layout: null
         {{ last_modified_pages.last_modified_at | date: "%Y-%m-%d" | strip }}
       {% endif %}
     </lastmod>
-  </sitemap>  <!-- Sitemap for Tag Pages -->  <sitemap>
+  </sitemap>
+
+  <!-- Sitemap for Tag Pages -->
+  <sitemap>
     <loc>{{ site.url }}/post_tag-sitemap.xml</loc>
     <lastmod>
       {% assign latest_modified_date = nil %}
@@ -34,4 +43,6 @@ layout: null
         {{ latest_modified_date | date: "%Y-%m-%d" | strip }}
       {% endif %}
     </lastmod>
-  </sitemap></sitemapindex>
+  </sitemap>
+
+</sitemapindex>
